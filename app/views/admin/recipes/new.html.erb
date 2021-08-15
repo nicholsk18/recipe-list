@@ -1,0 +1,42 @@
+<div class="container">
+    <h1 class="text-center">New Recipe</h1>
+    <%= form_with url: "/admin/recipes/create" do |form| %>
+        
+        <div class="form-floating mb-3">
+            <%= 
+                form.text_field :title,
+                class: "form-control",
+                id: "title"
+            %>
+
+            <%= form.label :title %>
+        </div>
+
+        <div class="form-floating mb-3">
+            <%= 
+                form.text_field :description,
+                class: "form-control",
+                id: "description"
+            %>
+            
+            <%= form.label :description %>
+        </div>
+
+        <div class="form-floating">
+            <%= 
+                form.text_area :recipe_body, 
+                class: "form-control", 
+                placeholder: "Leave a comment here", 
+                id: "recipe",
+                style: "height: 250px"
+            %>
+            <%= form.label :recipe %>
+        </div>
+
+        <div class="d-grid gap-2 mt-3">
+            <%= 
+                form.submit name: "save", 
+                class: "btn btn-block btn-success" %>
+        </div>
+    <% end %>
+</div>

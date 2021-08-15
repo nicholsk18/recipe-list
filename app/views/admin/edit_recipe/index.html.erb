@@ -1,2 +1,9 @@
-<h1>Admin::EditRecipe#index</h1>
-<p>Find me in app/views/admin/edit_recipe/index.html.erb</p>
+<div class="container">
+    <h1 class="text-center"></h1>
+    <%= form_with model: recipe do |form| %>
+        <div>
+            <%= form.label :title %>
+            <%= form.text_field :title %>
+        </div>
+    <% end %>
+</div>
