@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/recipes', to: 'recipes#index'
   get '/recipe/:id', to: 'recipes#show'
+
+  # Sign up and registration
+  get 'sign_up', to: 'registrations#new'
+  post 'sign_up', to: 'registrations#create'
   
   # admin routes
   namespace :admin do
