@@ -1,10 +1,34 @@
 class Admin::RecipesController < ApplicationController
+  before_action :require_user_logged_in!
+
   def index
     @recipes = Recipe.all
   end
 
   def show
     @recipe = Recipe.find(params[:id])
+  end
+
+  def edit
+    # if @user != Current.user
+    #   redirect_to admin_dashboard_path
+    # end
+    @recipe = Recipe.find_by(user_id: Current.user.userID, id: params[:id])
+
+    if @recipe.nil?
+      flash[:alert] = 'You do not have access to that recipe'
+      redirect_to admin_dashboard_path
+    end
+
+    # @recipe = Recipe.find(params[:id])
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id], user_id: Current.user.userID)
+
+    if (@recipe.update(recipe_params))
+      redirect_to admin_dashboard_path
+    end
   end
 
   def new
@@ -23,7 +47,6 @@ class Admin::RecipesController < ApplicationController
 
   private
     def recipe_params
-      # params.require(:recipe).permit(:title, :description, :recipe_body)
       params.permit(:title, :description, :recipe_body)
     end
 end

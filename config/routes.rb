@@ -16,7 +16,10 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboard#index'
     post '/recipes/create'
 
-    resources :recipes
+    # resources :recipes
+    get '/recipe/:id', to: 'recipes#show'
+    get '/recipe/edit/:id', to: 'recipes#edit'
+    post '/recipe/edit/:id', to: 'recipes#update'
   end
   
   resources :tasks
