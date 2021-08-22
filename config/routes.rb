@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'recipes#index'
   get '/recipes', to: 'recipes#index'
   get '/recipe/:id', to: 'recipes#show'
 
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'sign_in', to: 'sessions#new'
   post 'sign_in', to: 'sessions#create', as: 'log_in'
-  post 'sign_out', to: 'sessions#destroy', as: 'log_out'
+  delete 'sign_out', to: 'sessions#destroy', as: 'log_out'
   
   # admin routes
   namespace :admin do
