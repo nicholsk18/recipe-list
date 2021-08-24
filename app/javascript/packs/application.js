@@ -15,3 +15,7 @@ ActiveStorage.start()
 import 'jquery'
 import "bootstrap"
 import "../stylesheets/applications"
+import "../stylesheets/main"
+
+// include everywhere
+require('packs/main')

@@ -10,9 +10,6 @@ class Admin::RecipesController < ApplicationController
   end
 
   def edit
-    # if @user != Current.user
-    #   redirect_to admin_dashboard_path
-    # end
     @recipe = Recipe.find_by(user_id: Current.user.userID, id: params[:id])
 
     if @recipe.nil?
@@ -20,7 +17,6 @@ class Admin::RecipesController < ApplicationController
       redirect_to admin_dashboard_path
     end
 
-    # @recipe = Recipe.find(params[:id])
   end
 
   def update
@@ -39,14 +35,15 @@ class Admin::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      redirect_to admin_recipes_path
+      redirect_to admin_dashboard_path
     else
+      flash[:alert] = 'Your recipe could not save. Try again or contact admin.'
       render :new
     end
   end
 
   private
     def recipe_params
-      params.permit(:title, :description, :recipe_body)
+      params.permit(:title, :description, :recipe_body).merge(user_id: Current.user.userID)
     end
 end
