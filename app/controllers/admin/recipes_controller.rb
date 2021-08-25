@@ -20,7 +20,7 @@ class Admin::RecipesController < ApplicationController
   end
 
   def update
-    @recipe = Recipe.find(params[:id], user_id: Current.user.userID)
+    @recipe = Recipe.find_by(id: params[:id], user_id: Current.user.userID)
 
     if (@recipe.update(recipe_params))
       redirect_to admin_dashboard_path
@@ -43,7 +43,7 @@ class Admin::RecipesController < ApplicationController
   end
 
   private
-    def recipe_params
-      params.permit(:title, :description, :recipe_body).merge(user_id: Current.user.userID)
-    end
+  def recipe_params
+    params.permit(:title, :description, :recipe_body).merge(user_id: Current.user.userID)
+  end
 end

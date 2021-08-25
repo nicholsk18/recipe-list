@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
     # route profile
     get '/profile/', to: 'profile#index'
+    post '/profile/edit', to: 'profile#edit'
   end
   
   resources :tasks
