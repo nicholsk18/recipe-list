@@ -10,7 +10,7 @@ class Admin::RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find_by(user_id: Current.user.userID, id: params[:id])
+    @recipe = Recipe.find_by(user_id: Current.user.id, id: params[:id])
 
     if @recipe.nil?
       flash[:alert] = 'You do not have access to that recipe'
@@ -20,7 +20,7 @@ class Admin::RecipesController < ApplicationController
   end
 
   def update
-    @recipe = Recipe.find_by(id: params[:id], user_id: Current.user.userID)
+    @recipe = Recipe.find_by(id: params[:id], user_id: Current.user.id)
 
     if (@recipe.update(recipe_params))
       redirect_to admin_dashboard_path
@@ -44,6 +44,6 @@ class Admin::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.permit(:title, :description, :recipe_body).merge(user_id: Current.user.userID)
+    params.permit(:title, :description, :recipe_body).merge(user_id: Current.user.id)
   end
 end

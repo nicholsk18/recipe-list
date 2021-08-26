@@ -10,37 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_011317) do
+ActiveRecord::Schema.define(version: 2021_08_26_023841) do
 
-  create_table "articles", charset: "latin1", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "recipes", charset: "latin1", force: :cascade do |t|
+  create_table "recipes", charset: "utf8", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.text "recipe_body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "users_id", null: false
+    t.index ["users_id"], name: "index_recipes_on_users_id"
   end
 
-  create_table "tasks", charset: "latin1", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "users", primary_key: "userID", charset: "latin1", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "fName"
     t.string "lName"
     t.string "email"
     t.string "password_digest"
+    t.integer "access_level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "recipes", "users", column: "users_id"
 end

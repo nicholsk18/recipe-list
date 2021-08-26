@@ -1,10 +1,10 @@
 class Admin::ProfileController < ApplicationController
     def index
-        @user = User.find(Current.user.userID)
+        @user = User.find(Current.user.id)
     end
 
     def edit
-        @user = User.find(Current.user.userID)
+        @user = User.find(Current.user.id)
 
         if @user.update(user_params)
             flash[:notice] = "Your changes where saved"
