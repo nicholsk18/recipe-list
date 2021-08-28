@@ -9,6 +9,12 @@ class RegistrationsController < ApplicationController
         session[:user_id] = @user.id
         redirect_to root_path, notice: 'Successfully created account'
       else
+        errors = {}
+        errors["email"] = @user.valid?(:email)
+        errors["password"] = @user.valid?(:password)
+        errors["pass_confirmation"] = @user.valid?(:password_confirmation)
+
+        flash.now[:alert] = "Invalid Email or Password #{errors}"
         render :new
       end
     end
