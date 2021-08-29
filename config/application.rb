@@ -26,8 +26,8 @@ module Cms
       end if File.exists?(env_file)
     end
 
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
-      html_tag
-    }
+    # config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+    #   html_tag
+    # }
   end
 end
