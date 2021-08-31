@@ -32,18 +32,20 @@ class Admin::RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @user = User.find(Current.user.id)
+    @recipe = @user.recipes.new(recipe_params)
 
     if @recipe.save
       redirect_to admin_dashboard_path
     else
-      flash[:alert] = 'Your recipe could not save. Try again or contact admin.'
+      flash[:alert] = "Your recipe could not be saved. Try again or contact admin. #{@recipe.errors.full_messages}"
       render :new
     end
   end
 
   private
   def recipe_params
-    params.permit(:title, :description, :recipe_body).merge(user_id: Current.user.id)
+    params.permit(:title, :description, :recipe_body)
+    # .merge(user_id: Current.user.id)
   end
 end

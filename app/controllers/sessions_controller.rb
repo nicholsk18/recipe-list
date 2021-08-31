@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
             redirect_to admin_dashboard_path, notice: 'logged in'
 
         else
-            flash.now[:alert] = 'invalid email or password'
+            flash.now[:alert] = 'Invalid email or password'
             render :new
         end
     end

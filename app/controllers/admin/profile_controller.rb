@@ -1,4 +1,6 @@
 class Admin::ProfileController < ApplicationController
+    has_many :recipe
+
     def index
         @user = User.find(Current.user.id)
     end
