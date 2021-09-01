@@ -22,6 +22,18 @@ class Admin::RecipesController < ApplicationController
   def update
     @recipe = Recipe.find_by(id: params[:id], user_id: Current.user.id)
 
+    recipe_image = params[:picture]
+    # rename file for easier access
+    img_type = recipe_image.content_type.split("/")[-1]
+
+    image_file = Rails.root.join('public', 'uploads', "recipe-#{@recipe.id}.#{img_type}")
+
+    if !File.exist?(image_file)
+      File.open(Rails.root.join('public', 'uploads', "recipe-#{@recipe.id}.#{img_type}"), 'wb') do |file|
+        file.write(recipe_image.read)
+      end
+    end
+
     if (@recipe.update(recipe_params))
       redirect_to admin_dashboard_path
     end

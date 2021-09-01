@@ -2,6 +2,24 @@
     <h1 class="text-center">New Recipe</h1>
     <%= form_with url: "/admin/recipe/edit/#{@recipe.id}" do |form| %>
         
+        <div class="recipe-img_container">
+            <%= 
+                image_tag "/uploads/recipe-#{@recipe.id}.png",
+                class: "recipe-img"
+            %>
+        </div>
+
+        <div class="input-group mb-3">
+            <%= 
+                form.file_field :picture,
+                class: "form-control"
+            %>
+            <!-- <input type="file" class="form-control" id="recipePic"> -->
+            <label class="input-group-text" for="recipePic">Upload</label>
+        </div>
+
+        <!-- <input type=file data-direct-upload-url="<%= rails_direct_uploads_url %>" /> -->
+
         <div class="form-floating mb-3">
             <%= 
                 form.text_field :title,
