@@ -4,13 +4,13 @@
         <% @recipes.each do | recipe | %> 
             <div class="col-12 col-md-6 col-lg-4 p-3">
                 <div class="card">
-                    <img src="" class="card-img-top" alt="">
+                    <img src="<%=get_image(recipe.id)%>" class="card-img-top" alt="recipe image">
                     <div class="card-body">
                         <h5 class="card-title"><%= recipe.title %></h5>
                         <p class="card-text">
                             <%= recipe.description %>
                         </p>
-                        <a href="/recipe/<%=recipe.id%>" class="btn btn-success">Read More</a>
+                        <a href="/recipe/<%=recipe.id%>" class="btn btn-success">See Recipe</a>
                     </div>
                 </div>
             </div>
